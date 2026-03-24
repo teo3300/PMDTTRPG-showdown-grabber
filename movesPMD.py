@@ -42,6 +42,14 @@ def fetchCachedJson(url):
         json.dump(data, file)
     return data
 
+# Load data only once from disk
+def loadQuickEnv():
+    return {'learnset'          : fetchCachedJson(learnsetURL),
+            'pokedex'           : fetchCachedJson(pokedexURL),
+            'movesPMD'          : pd.read_excel(filePMD, sheet_name="Moves"),
+            'rareQualitiesPMD'  : pd.read_excel(filePMD, sheet_name="Rare Qualities")
+    }
+
 def _getEvos(pokemonName, pokedex):
     # If some evos exist
     if 'evos' in pokedex[pokemonName]:
@@ -68,19 +76,29 @@ def _getPreEvo(pokemonName, pokedex):
 # Fetch whole evolution line
 def getEvoLine(pokemonName, pokedex):
     queryRes = _getPreEvo(pokemonName, pokedex) + [pokemonName] + _getEvos(pokemonName, pokedex)
-    print(f"Opzione \"evo\", utilizzo la linea evolutiva - {queryRes}")
     return queryRes
+
 # }}}
 
-def queryName(inputName, evo=False):
+def queryName(inputName, evo=False, env=None):
 
-    # Fetch smogon data
-    learnset = fetchCachedJson(learnsetURL)
-    pokedex  = fetchCachedJson(pokedexURL)
-
+    # Avoid reading from file too many times, if variable is in memory, keep it
+    learnset            = None
+    pokedex             = None
+    movesPMD            = None
+    rareQualitiesPMD    = None
+    if env:
+        learnset = env['learnset']
+        pokedex = env['pokedex']
+        movesPMD = env['movesPMD']
+        rareQualitiesPMD = env['rareQualitiesPMD']
+    else:
+        # Fetch smogon data
+        learnset            = fetchCachedJson(learnsetURL)
+        pokedex             = fetchCachedJson(pokedexURL)
+        movesPMD            = pd.read_excel(filePMD, sheet_name="Moves")
+        rareQualitiesPMD    = pd.read_excel(filePMD, sheet_name="Rare Qualities")
     # Load PMD excel
-    movesPMD = pd.read_excel(filePMD, sheet_name="Moves")
-    rareQualitiesPMD = pd.read_excel(filePMD, sheet_name="Rare Qualities")
 
     # Get the pokemon name
     pokemonName = sanitize(inputName)

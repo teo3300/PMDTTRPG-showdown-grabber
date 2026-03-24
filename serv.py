@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
-from movesPMD import queryName
 
+from movesPMD import queryName, loadQuickEnv 
+
+quickEnv = loadQuickEnv();
 app = Flask(__name__)
 
 # Clean output
@@ -17,7 +19,7 @@ def index():
     if request.method == "POST":
         user_text = request.form.get("user_text")
         evoLine = request.form.get("evolutions")
-        query_names, table_data = queryName(user_text, True if evoLine else False)
+        query_names, table_data = queryName(user_text, True if evoLine else False, env=quickEnv)
         if table_data:
             type_column_idx = table_data[0].index("[Type]")
             category_column_idx = table_data[0].index("[Category]")
