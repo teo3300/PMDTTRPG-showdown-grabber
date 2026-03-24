@@ -49,7 +49,7 @@ def _getEvos(pokemonName, pokedex):
         listEvos = []
         for evo in evos:
             # Collect all evos and their subsequent evos
-            listEvos += _getEvos(sanitize(evo), pokedex) + [sanitize(evo)]
+            listEvos += [sanitize(evo)] + _getEvos(sanitize(evo), pokedex)
         return listEvos
     else:
         # Return an empty list
@@ -67,7 +67,7 @@ def _getPreEvo(pokemonName, pokedex):
 
 # Fetch whole evolution line
 def getEvoLine(pokemonName, pokedex):
-    queryRes = [pokemonName] + _getPreEvo(pokemonName, pokedex) + _getEvos(pokemonName, pokedex)
+    queryRes = _getPreEvo(pokemonName, pokedex) + [pokemonName] + _getEvos(pokemonName, pokedex)
     print(f"Opzione \"evo\", utilizzo la linea evolutiva - {queryRes}")
     return queryRes
 # }}}
