@@ -1,0 +1,71 @@
+.color-Dark {
+    background-color: #755644;
+}
+.color-Rock {
+    background-color: #bc9f10;
+}
+.color-Ground {
+    background-color: #eabd53;
+}
+.color-Normal {
+    background-color: #a8a774;
+}
+.color-Water {
+    background-color: #5592f7;
+}
+.color-Dragon {
+    background-color: #7731ff;
+}
+.color-Fighting {
+    background-color: #d40f1b;
+}
+.color-Ice {
+    background-color: #7edcd8;
+}
+.color-Steel {
+    background-color: #b7b7d0;
+}
+.color-Ghost {
+    background-color: #78569b;
+}
+.color-Psychic {
+    background-color: #ff4287;
+}
+.color-Poison {
+    background-color: #b133a7;
+}
+.color-Grass {
+    background-color: #5dc933;
+}
+.color-Bug {
+    background-color: #a0bb00;
+}
+.color-Electric {
+    background-color: #ffcf00;
+}
+.color-Flying {
+    background-color: #ad8ef9;
+}
+.color-Fairy {
+    background-color: #e27faf;
+}
+.color-Fire {
+    background-color: #fe7800;
+}
+
+.color-Physical {
+    background-color: #ffe4ca;
+}
+.color-Physical-Status{
+    background-color: #fff2c7;
+}
+.color-Special {
+    background-color: #cce3f6;
+}
+.color-Special-Status {
+    background-color: #cce3f6;
+}
+
+.color-None {
+    background-color: #ccc;
+}

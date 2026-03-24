@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PMDTTRPG moves</title>
+    <link rel="stylesheet" href="/static/coloring.css">
+    <style>
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #888; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2>Search moves by pokemon name</h2>
+    <form method="POST">
+        <input type="text" name="user_text" placeholder="Pokemon name" required>
+        <input type="checkbox" name="evolutions" value="yes"> Use evolutions
+        <button type="submit">Search moves</button>
+    </form>
+    {% if query_names %}
+        <h3>Matches:</h3>
+            {% for el in query_names %}
+                {{ el }} {% if not loop.last %} - {% endif %} 
+            {% endfor %}
+    {% endif %}
+
+    {% if table_data %}
+        <h3>Results:</h3>
+        <table>
+            {% for row in table_data %}
+                <tr>
+                    {% for cell in row %}
+                        {% set idx = loop.index0 %}
+                        <td {% if (idx == type_column_idx or idx == category_column_idx) and cell %}
+                                class="color-{{ cell | replace(' ', '-') }}"
+                            {% else %}
+                                {% if row[type_column_idx] == "" %}class="color-None"{% endif %}
+                            {% endif %}>
+                            {{ cell }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        {% if user_text %} <h3>Pokemon not found</h3> {% endif %}
+    {% endif %}
+<br>
+<br>
+<p>Source code available at <a href='https://github.com/teo3300/PMDTTRPG-showdown-grabber'>PMDTTRPG-showdown-grabber</a> (couldn't come up with a shorter name)</p>
+</body>
+</html>
