@@ -112,8 +112,8 @@ def queryName(inputName, evo=False):
     resultMoves = resultMoves.iloc[:, 1:]
 
     # Save
-    saveFile = f"{outputDir}/{"evo-" if evo else ""}{pokemonName}.xlsx"
-    print(f"Salvo il risultato in \"{saveFile}\"")
+    # saveFile = f"{outputDir}/{"evo-" if evo else ""}{pokemonName}.xlsx"
+    # print(f"Salvo il risultato in \"{saveFile}\"")
     # resultMoves.to_excel(saveFile, startcol=1, index=False)
     resultMoves = resultMoves.fillna('')
 

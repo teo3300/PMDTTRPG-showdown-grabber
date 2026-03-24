@@ -41,6 +41,9 @@ HTML_TEMPLATE = """
             {% endfor %}
         </table>
     {% endif %}
+<br>
+<br>
+<p>Source code available at <a href='https://github.com/teo3300/PMDTTRPG-showdown-grabber'>PMDTTRPG-showdown-grabber</a> (couldn't come up with a shorter name)</p>
 </body>
 </html>
 """
