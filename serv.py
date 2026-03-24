@@ -40,6 +40,8 @@ HTML_TEMPLATE = """
                 </tr>
             {% endfor %}
         </table>
+    {% else %}
+        {% if user_text %} <h3>Pokemon not found</h3> {% endif %}
     {% endif %}
 <br>
 <br>
@@ -52,13 +54,14 @@ HTML_TEMPLATE = """
 def index():
     table_data = None
     query_names = None
+    user_text = None
     if request.method == "POST":
         user_text = request.form.get("user_text")
         evoLine = request.form.get("evolutions")
         # Triggering your hook function
         query_names, table_data = queryName(user_text, True if evoLine else False)
     
-    return render_template_string(HTML_TEMPLATE, table_data=table_data, query_names=query_names)
+    return render_template_string(HTML_TEMPLATE, table_data=table_data, query_names=query_names, user_text=user_text)
 
 if __name__ == "__main__":
     app.run(debug=True)

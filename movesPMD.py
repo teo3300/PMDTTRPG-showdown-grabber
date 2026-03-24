@@ -14,7 +14,7 @@ import pandas as pd;
 
 def stop(*args):
     print(*args, file=sys.stderr)
-    exit(1)
+    return None, None
 
 def sanitize(moveName):
     moveName = moveName.replace(' ','')
@@ -35,8 +35,8 @@ def fetchCachedJson(url):
 
     import requests
     r = requests.get(url);
-    if r.status_code != 200:
-        stop(f"Impossibile raggiungere {url}")
+    if r.status_code != 200: return None, None
+
     data = r.json()
     with gzip.open(f"./{dataDir}/{name}.gz","wt", encoding="utf-8") as file:
         json.dump(data, file)
@@ -86,8 +86,7 @@ def queryName(inputName, evo=False):
     pokemonName = sanitize(inputName)
 
     # Check pokemon exists
-    if not pokemonName in pokedex:
-        stop(f"Non trovo \"{inputName}\" nel database di showdown")
+    if not pokemonName in pokedex: return None, None
 
     # If specified "evo" returns the whole evolution line
     queryNames = []
