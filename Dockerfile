@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install requirements (add gnuicorn)
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt gunicorn
 
 # Copy content of folder
 COPY . .
