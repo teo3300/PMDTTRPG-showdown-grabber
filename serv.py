@@ -16,7 +16,7 @@ HTML_TEMPLATE = """
     </style>
 </head>
 <body>
-    <h2>Enter Data</h2>
+    <h2>Search moves by pokemon name</h2>
     <form method="POST">
         <input type="text" name="user_text" placeholder="Pokemon name" required>
         <input type="checkbox" name="evolutions" value="yes"> Use evolutions
